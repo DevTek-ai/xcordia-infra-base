@@ -94,15 +94,17 @@ export class InfraStack extends cdk.Stack {
     //-----------RDS-------------
 
     const db_instance = new rds.DatabaseInstance(this, 'db-instance', {
-      vpc : vpc,
+      vpc: vpc, 
       engine: rds.DatabaseInstanceEngine.postgres({
         version: rds.PostgresEngineVersion.VER_10
-      }),      
+      }),     
       publiclyAccessible: false,
       credentials: rds.Credentials.fromGeneratedSecret(config.get('DB_USERNAME')),
       databaseName: `${config.get('DB_NAME')}`,
       instanceIdentifier: `${config.get('DB_NAME')}`,
-    
+      vpcSubnets: {
+        subnetType: ec2.SubnetType.ISOLATED,
+      },
     });
 
     new cdk.CfnOutput(this, 'DB endpoint', { value: db_instance.instanceEndpoint.hostname });
