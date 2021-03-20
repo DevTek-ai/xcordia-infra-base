@@ -70,8 +70,41 @@ export class InfraStack extends cdk.Stack {
 
     //-----------ECR-------------
     
-    const ecr_repo_platform = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
-      repositoryName: this.get_logical_env_name('api-repo'),
+    const ecr_repo_platform2 = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+      repositoryName: "ecr_repo_platform2",
+      lifecycleRules: [
+        {
+          maxImageCount: 10,
+          tagStatus: ecr.TagStatus.ANY,
+          description: 'lifecycle cleanup rule'
+        }
+      ],
+    });
+
+    const ecr_repo_document = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+      repositoryName: "ecr_repo_document",
+      lifecycleRules: [
+        {
+          maxImageCount: 10,
+          tagStatus: ecr.TagStatus.ANY,
+          description: 'lifecycle cleanup rule'
+        }
+      ],
+    });
+
+    const ecr_repo_payment = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+      repositoryName: "ecr_repo_payment",
+      lifecycleRules: [
+        {
+          maxImageCount: 10,
+          tagStatus: ecr.TagStatus.ANY,
+          description: 'lifecycle cleanup rule'
+        }
+      ],
+    });
+
+    const ecr_repo_order = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+      repositoryName: "ecr_repo_order",
       lifecycleRules: [
         {
           maxImageCount: 10,
