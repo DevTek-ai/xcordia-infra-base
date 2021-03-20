@@ -81,7 +81,7 @@ export class InfraStack extends cdk.Stack {
       ],
     });
     
-    const ecr_repo_platform2 = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+    const ecr_repo_platform2 = new ecr.Repository(this, this.get_logical_env_name('platform2'), {
       repositoryName: "ecr_repo_platform2",
       lifecycleRules: [
         {
@@ -92,7 +92,7 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
-    const ecr_repo_document = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+    const ecr_repo_document = new ecr.Repository(this, this.get_logical_env_name('document'), {
       repositoryName: "ecr_repo_document",
       lifecycleRules: [
         {
@@ -103,7 +103,7 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
-    const ecr_repo_payment = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+    const ecr_repo_payment = new ecr.Repository(this, this.get_logical_env_name('payment'), {
       repositoryName: "ecr_repo_payment",
       lifecycleRules: [
         {
@@ -114,7 +114,7 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
-    const ecr_repo_order = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
+    const ecr_repo_order = new ecr.Repository(this, this.get_logical_env_name('order'), {
       repositoryName: "ecr_repo_order",
       lifecycleRules: [
         {
