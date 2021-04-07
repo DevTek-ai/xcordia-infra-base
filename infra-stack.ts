@@ -127,7 +127,7 @@ export class InfraStack extends cdk.Stack {
     //-----------RDS-------------
     
     //default value for dev & QA
-    var db_instance_type = ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MEDIUM);
+    var db_instance_type = ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE3, ec2.InstanceSize.MEDIUM);
     
     if (process.env.NODE_ENV === 'production') {
       db_instance_type = ec2.InstanceType.of(ec2.InstanceClass.M5,ec2.InstanceSize.LARGE);
