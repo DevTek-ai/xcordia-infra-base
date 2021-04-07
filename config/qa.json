@@ -1,4 +1,5 @@
-{
-    "PROJECT_NAME": "xcodia-base",    
-    "ENVIRONMENT": "qa"
+{    
+    "ENVIRONMENT": "qa",
+    "VPC_IP": "10.10.0.0/16",    
+    "DB_PASSWORD": "Vpoc.xq7sJZ^7pP3lARl0=G-M83fFv"
 }

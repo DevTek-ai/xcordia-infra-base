@@ -70,17 +70,6 @@ export class InfraStack extends cdk.Stack {
 
     //-----------ECR-------------
 
-    const ecr_repo_platform = new ecr.Repository(this, this.get_logical_env_name('ecr'), {
-      repositoryName: this.get_logical_env_name('api-repo'),
-      lifecycleRules: [
-        {
-          maxImageCount: 10,
-          tagStatus: ecr.TagStatus.ANY,
-          description: 'lifecycle cleanup rule'
-        }
-      ],
-    });
-    
     const ecr_repo_platform2 = new ecr.Repository(this, this.get_logical_env_name('platform2'), {
       repositoryName: "ecr_repo_platform2",
       lifecycleRules: [
@@ -136,6 +125,13 @@ export class InfraStack extends cdk.Stack {
 
  
     //-----------RDS-------------
+    
+    //default value for dev & QA
+    var db_instance_type = ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MEDIUM);
+    
+    if (process.env.NODE_ENV === 'production') {
+      db_instance_type = ec2.InstanceType.of(ec2.InstanceClass.M5,ec2.InstanceSize.LARGE);
+    }    
 
     const db_instance = new rds.DatabaseInstance(this, 'db-instance', {
       vpc: vpc, 
@@ -149,14 +145,13 @@ export class InfraStack extends cdk.Stack {
       vpcSubnets: {
         subnetType: ec2.SubnetType.ISOLATED,
       },
+      instanceType: db_instance_type
     });
 
     new cdk.CfnOutput(this, 'DB endpoint', { value: db_instance.instanceEndpoint.hostname });
     new cdk.CfnOutput(this, 'DB name', { value: db_instance.instanceIdentifier });
     new cdk.CfnOutput(this, 'Secret Name', { value: db_instance.secret?.secretName! });
-
-
-
+    
   }
 
   get_logical_env_name(resource_type: string): string {
