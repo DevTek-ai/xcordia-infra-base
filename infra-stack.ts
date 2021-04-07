@@ -70,8 +70,9 @@ export class InfraStack extends cdk.Stack {
 
     //-----------ECR-------------
 
+    var platform_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_platform2" : this.get_logical_env_name("ecr_repo_platform");
     const ecr_repo_platform2 = new ecr.Repository(this, this.get_logical_env_name('platform2'), {
-      repositoryName: "ecr_repo_platform2",
+      repositoryName: platform_repo_name,
       lifecycleRules: [
         {
           maxImageCount: 10,
@@ -81,8 +82,9 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
+    var document_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_document" : this.get_logical_env_name("ecr_repo_document");
     const ecr_repo_document = new ecr.Repository(this, this.get_logical_env_name('document'), {
-      repositoryName: "ecr_repo_document",
+      repositoryName: document_repo_name,
       lifecycleRules: [
         {
           maxImageCount: 10,
@@ -92,8 +94,9 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
+    var payment_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_payment" : this.get_logical_env_name("ecr_repo_payment");
     const ecr_repo_payment = new ecr.Repository(this, this.get_logical_env_name('payment'), {
-      repositoryName: "ecr_repo_payment",
+      repositoryName: payment_repo_name,
       lifecycleRules: [
         {
           maxImageCount: 10,
@@ -103,8 +106,9 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
+    var order_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_order" : this.get_logical_env_name("ecr_repo_order");
     const ecr_repo_order = new ecr.Repository(this, this.get_logical_env_name('order'), {
-      repositoryName: "ecr_repo_order",
+      repositoryName: order_repo_name,
       lifecycleRules: [
         {
           maxImageCount: 10,
