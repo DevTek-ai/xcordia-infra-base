@@ -118,6 +118,16 @@ export class InfraStack extends cdk.Stack {
       ],
     });
 
+    const ecr_repo_shop_ui = new ecr.Repository(this, this.get_logical_env_name('ecr_repo_shop_ui'), {
+      repositoryName: this.get_logical_env_name("ecr_repo_shop_ui"),
+      lifecycleRules: [
+        {
+          maxImageCount: 10,
+          tagStatus: ecr.TagStatus.ANY,
+          description: 'lifecycle cleanup rule'
+        }
+      ],
+    });
     
     //-----------VPC-------------
     const vpc = new ec2.Vpc(this, this.get_logical_env_name('vpc'), {

@@ -3,7 +3,7 @@
 set -eux
 # account # 
 
-echo "🚀 Deploying infra to QA..."
+echo "🚀 Deploying infra to Dev..."
 npm i
 
 export NODE_ENV=
