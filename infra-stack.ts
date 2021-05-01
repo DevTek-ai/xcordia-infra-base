@@ -81,6 +81,7 @@ export class InfraStack extends cdk.Stack {
         }
       ],
     });
+    new cdk.CfnOutput(this, "ecr_repo_platform2", { value: ecr_repo_platform2.repositoryUri });
 
     var document_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_document" : this.get_logical_env_name("ecr_repo_document");
     const ecr_repo_document = new ecr.Repository(this, this.get_logical_env_name('document'), {
@@ -93,6 +94,7 @@ export class InfraStack extends cdk.Stack {
         }
       ],
     });
+    new cdk.CfnOutput(this, "ecr_repo_document", { value: ecr_repo_document.repositoryUri });
 
     var payment_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_payment" : this.get_logical_env_name("ecr_repo_payment");
     const ecr_repo_payment = new ecr.Repository(this, this.get_logical_env_name('payment'), {
@@ -105,6 +107,7 @@ export class InfraStack extends cdk.Stack {
         }
       ],
     });
+    new cdk.CfnOutput(this, "ecr_repo_payment", { value: ecr_repo_payment.repositoryUri });
 
     var order_repo_name = (process.env.NODE_ENV === "dev") ? "ecr_repo_order" : this.get_logical_env_name("ecr_repo_order");
     const ecr_repo_order = new ecr.Repository(this, this.get_logical_env_name('order'), {
@@ -117,6 +120,7 @@ export class InfraStack extends cdk.Stack {
         }
       ],
     });
+    new cdk.CfnOutput(this, "order_repo_name", { value: ecr_repo_order.repositoryUri });
 
     const ecr_repo_shop_ui = new ecr.Repository(this, this.get_logical_env_name('ecr_repo_shop_ui'), {
       repositoryName: this.get_logical_env_name("ecr_repo_shop_ui"),
@@ -128,6 +132,7 @@ export class InfraStack extends cdk.Stack {
         }
       ],
     });
+    new cdk.CfnOutput(this, "ecr_repo_shop_ui", {value: ecr_repo_shop_ui.repositoryUri});
     
     //-----------VPC-------------
     const vpc = new ec2.Vpc(this, this.get_logical_env_name('vpc'), {
